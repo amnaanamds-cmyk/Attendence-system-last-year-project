@@ -6,6 +6,6 @@ COPY requirements.txt requirements-postgres.txt ./
 RUN pip install --no-cache-dir -r requirements.txt -r requirements-postgres.txt
 COPY . .
 RUN python scripts/download_models.py
-EXPOSE 8000 8443
-# default: HTTPS on 8443 with a self-signed certificate (camera access needs HTTPS)
-CMD ["python", "run.py", "--lan", "--host", "0.0.0.0", "--port", "8443"]
+EXPOSE 8000
+CMD ["sh", "-c", "python run.py --host 0.0.0.0 --port ${PORT:-8000}"]
+
